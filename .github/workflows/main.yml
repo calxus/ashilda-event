@@ -1,0 +1,21 @@
+name: 'Main'
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-development:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@master
+      - name: Build and push image
+        uses: gtadam/go-build-action@v2
+        with:
+          IMAGE_NAMESPACE: 'gtadam89'
+          IMAGE_NAME: 'ashilda-event'
+          IMAGE_VERSION: 'latest'
+          DOCKER_USERNAME: '${{ secrets.DOCKER_USERNAME }}'
+          DOCKER_PASSWORD: '${{ secrets.DOCKER_PASSWORD }}'
