@@ -34,4 +34,5 @@ jobs:
       - name: Deploy service
         uses: gtadam/kubernetes-deploy-action@latest
         with:
+          KUBE_CONFIG: "${{ secrets.KUBE_CONFIG }}"
           RELEASE_NAME: "ashilda-event"
