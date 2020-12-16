@@ -1,4 +1,4 @@
-name: 'Main'
+name: "Main"
 
 on:
   push:
@@ -31,6 +31,7 @@ jobs:
           SERVICE_IMAGE_NAME: "ashilda-event"
           SERVICE_IMAGE_NAMESPACE: "gtadam89"
           SERVICE_IMAGE_VERSION: "latest"
+          SERVICE_ENVVARS: "[{\"name\": \"DATABASE_USERNAME\", \"value\": \"${{ secrets.DATABASE_USERNAME }}\"},{\"name\": \"DATABASE_PASSWORD\", \"value\": \"${{ secrets.DATABASE_PASSWORD }}\"},{\"name\": \"DATABASE_HOST\", \"value\": \"${{ secrets.DATABASE_HOST }}\"},{\"name\": \"DATABASE_PORT\", \"value\": \"${{ secrets.DATABASE_PORT }}\"},{\"name\": \"DATABASE_NAME\", \"value\": \"${{ secrets.DATABASE_BASENAME }}-development\"}]"
       - name: Deploy service
         uses: gtadam/kubernetes-deploy-action@latest
         with:
