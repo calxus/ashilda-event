@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  deploy-development:
+  build-image:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -14,8 +14,20 @@ jobs:
       - name: Build and push image
         uses: gtadam/go-build-action@latest
         with:
-          IMAGE_NAMESPACE: 'gtadam89'
-          IMAGE_NAME: 'ashilda-event'
-          IMAGE_VERSION: 'latest'
-          DOCKER_USERNAME: '${{ secrets.DOCKER_USERNAME }}'
-          DOCKER_PASSWORD: '${{ secrets.DOCKER_PASSWORD }}'
+          IMAGE_NAMESPACE: "gtadam89"
+          IMAGE_NAME: "ashilda-event"
+          IMAGE_VERSION: "latest"
+          DOCKER_USERNAME: "${{ secrets.DOCKER_USERNAME }}"
+          DOCKER_PASSWORD: "${{ secrets.DOCKER_PASSWORD }}"
+  deploy-service:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy service
+        uses: gtadam/kubernetes-deploy-action@latest
+        with:
+          SERVICE_NAME: "ashilda-event"
+          SERVICE_REPLICA_COUNT: 3
+          SERVICE_IMAGE_NAME: "ashilda-event"
+          SERVICE_IMAGE_NAMESPACE: "gtadam89"
+          SERVICE_IMAGE_VERSION: "latest"
+          RELEASE_NAME: "ashilda-event"
