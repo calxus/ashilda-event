@@ -22,12 +22,15 @@ jobs:
   deploy-service:
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy service
-        uses: gtadam/kubernetes-deploy-action@latest
+      - name: Prepare deployment
+        uses: gtadam/prepare-kubernetes-deployment-action@latest
         with:
           SERVICE_NAME: "ashilda-event"
           SERVICE_REPLICA_COUNT: 3
           SERVICE_IMAGE_NAME: "ashilda-event"
           SERVICE_IMAGE_NAMESPACE: "gtadam89"
           SERVICE_IMAGE_VERSION: "latest"
+      - name: Deploy service
+        uses: gtadam/kubernetes-deploy-action@latest
+        with:
           RELEASE_NAME: "ashilda-event"
