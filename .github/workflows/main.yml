@@ -16,7 +16,6 @@ jobs:
         with:
           IMAGE_NAMESPACE: "gtadam89"
           IMAGE_NAME: "ashilda-event"
-          IMAGE_VERSION: "latest"
           DOCKER_USERNAME: "${{ secrets.DOCKER_USERNAME }}"
           DOCKER_PASSWORD: "${{ secrets.DOCKER_PASSWORD }}"
       - name: Save version
@@ -38,7 +37,7 @@ jobs:
         with:
           DEBUG: true
           SERVICE_NAME: "ashilda-event"
-          SERVICE_REPLICA_COUNT: 3
+          SERVICE_REPLICA_COUNT: 1
           SERVICE_IMAGE_NAME: "ashilda-event"
           SERVICE_IMAGE_NAMESPACE: "gtadam89"
           SERVICE_ENVVARS: "[{\"name\": \"DATABASE_USERNAME\", \"value\": \"${{ secrets.DATABASE_USERNAME }}\"},{\"name\": \"DATABASE_PASSWORD\", \"value\": \"${{ secrets.DATABASE_PASSWORD }}\"},{\"name\": \"DATABASE_HOST\", \"value\": \"${{ secrets.DATABASE_HOST }}\"},{\"name\": \"DATABASE_PORT\", \"value\": \"${{ secrets.DATABASE_PORT }}\"},{\"name\": \"DATABASE_NAME\", \"value\": \"${{ secrets.DATABASE_BASENAME }}-development\"}]"
