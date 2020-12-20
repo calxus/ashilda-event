@@ -1,2 +1,4 @@
 bin/
-src/github.com
+src/app/ashilda-event
+pkg
+env.sh
